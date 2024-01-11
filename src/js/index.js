@@ -235,7 +235,7 @@ function playVisualisation() {
     $.stroke();
     analyser.getByteFrequencyData(frequencyArray);
     for (let i = 0; i < bars; i++) {
-      radius = 105;
+      radius = 110;
       rads = (Math.PI * 2) / bars;
       barHeight = frequencyArray[i] * 0.6;
 
