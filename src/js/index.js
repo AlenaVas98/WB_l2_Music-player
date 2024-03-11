@@ -20,11 +20,14 @@ let updateTimer;
 let visualisation = true;
 
 let audio = current_track;
+
+let container = document.querySelector(".canvas_box");
+
 // данные для создания звуковых волн
-let C = document.querySelector("canvas"),
+let C = document.getElementById("canvas"),
   $ = C.getContext("2d"),
-  W = (C.width = innerWidth),
-  H = (C.height = innerHeight),
+  W = (C.width = container.clientWidth),
+  H = (C.height = container.clientHeight),
   centerX = W / 2,
   centerY = H / 2,
   radius,
@@ -42,29 +45,28 @@ const music_list = [
   {
     name: "No Time To Die",
     artist: "Billie Eilish",
-    music: "src/style/music/Billie_Eilish_-_No_Time_To_Die_68398336.mp3",
+    music: "src/music/Billie_Eilish_-_No_Time_To_Die_68398336.mp3",
   },
   {
     name: "Falling Down",
     artist: "Wid Cards",
-    music: "src/style/music/Gavin_DeGraw_-_Fire_29572564 copy.mp3",
+    music: "src/music/Gavin_DeGraw_-_Fire_29572564 copy.mp3",
   },
   {
     name: "I Bet My Life",
     artist: "Imagine_Dragons",
-    music: "src/style/music/Imagine_Dragons_-_I_Bet_My_Life_47829288.mp3",
+    music: "src/music/Imagine_Dragons_-_I_Bet_My_Life_47829288.mp3",
   },
   {
     name: "Children Of The Sky A Starfield",
     artist: "Imagine Dragons",
     music:
-      "src/style/music/imagine-dragons-children-of-the-sky-a-starfield-song-mp3.mp3",
+      "src/music/imagine-dragons-children-of-the-sky-a-starfield-song-mp3.mp3",
   },
   {
     name: "House Of Memories",
     artist: "Panic At The Disco",
-    music:
-      "src/style/music/Panic_At_The_Disco_-_House_Of_Memories_47951357.mp3",
+    music: "src/music/Panic_At_The_Disco_-_House_Of_Memories_47951357.mp3",
   },
 ];
 
@@ -224,19 +226,18 @@ function playVisualisation() {
   audio.play();
   startAnimation();
   function startAnimation() {
-    C.style.display = "block";
     radius = 105;
 
     $.clearRect(0, 0, W, H);
 
     $.beginPath();
     $.arc(centerX, centerY, radius, 0, Math.PI * (2 * piece));
-    $.lineWidth = 30;
+    $.lineWidth = 20;
     $.stroke();
     analyser.getByteFrequencyData(frequencyArray);
     for (let i = 0; i < bars; i++) {
-      radius = 110;
-      rads = (Math.PI * 2) / bars;
+      radius = 90;
+      rads = (Math.PI * 2) / bars; //линии
       barHeight = frequencyArray[i] * 0.6;
 
       x = centerX + Math.cos(rads * i) * radius;
